@@ -1,0 +1,63 @@
+/*2.1*/
+select Apellidos from Empleados;
+
+/*2.2*/
+select distinct Apellidos from Empleados;
+
+/*2.3*/
+select * from Empleados 
+where Apellidos = "Smith";
+
+/*2.4*/
+select * from Empleados where Apellidos = "Smith" or Apellidos = "Rogers";
+
+/*2.5*/
+select * from Empleados where Departamento = 14;
+
+/*2.6*/
+select * from Empleados where Departamento = 37 OR Departamento = 77;
+
+/*2.7*/
+select * from Empleados where Apellidos like "P%";
+
+/*2.8*/
+select sum(Presupuesto) from Departamentos;
+
+/*2.9*/
+select de.Nombre, COUNT(em.Nombre) as NumeroEmpleados from empleados as em, Departamento as de group by de.Nombre;
+
+/*2.10*/
+select * from Empleados, Departamentos;
+
+/*2.11*/
+select em.Nombre, em.Apellidos, de.Presupuesto from Empleados as em, Departamentos as de;
+
+/*2.12*/
+select em.Nombre, em.Apellidos, de.Presupuesto from Empleados as em, Departamentos as de where de.Presupuesto>60000;
+
+/*2.13*/
+select * from Departamentos where Presupuesto > (select AVG(Presupuesto) from Departamentos);
+
+/*2.14*/
+select Nombre from Departamentos where Id in (
+select Departamento from Empleados group by Departamento having COUNT(*)>2);
+
+/*2.15*/
+insert into Departamentos values (11, "Calidad", 40000);
+insert into empleados values ("8926719", "Esther", "Vazquez", 11);
+
+/*2.16*/
+update Departamentos set Presupuesto = Presupuesto * 0.9;
+
+/*2.17*/
+update Empleados set Departamento = 14 where Departamento = 77;
+
+/*2.18*/
+delete from Empleados where Departamento = 14;
+
+/*2.19*/
+delete from Empleados where Deparatmento 
+in (select CODIGO from departamentos where PRESUPUESTO>=60000);
+
+/*2.20*/
+delete from Empleados;

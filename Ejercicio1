@@ -1,0 +1,81 @@
+/*1.1*/
+Select Nombre from Articulos;
+
+/*1.2*/
+Select Nombre,Precio from Articulos;
+
+/*1.3*/
+Select Nombre,Precio from Articulos
+Where precio<= 200;
+
+/*1.4*/
+Select * from Articulos
+Where precio>= 60 AND precio <=120;
+
+/*1.5*/
+Select Nombre,Precio*166.386 AS PrecioPesetas from Articulos;
+
+/*1.6*/
+Select AVG(Precio) from Articulos;
+
+/*1.7*/
+Select AVG(Precio) from Articulos
+where IdFabricante = 2;
+
+/*1.8*/
+Select COUNT(Id) from Articulos
+where Precio >= 180;
+
+/*1.9*/
+Select Nombre,Precio from Articulos
+where Precio >= 180
+order by Nombre;
+
+/*1.10*/
+Select * from Articulos
+LEFT OUTER JOIN Fabricantes ON Articulos.IdFabricante = Fabricantes.Id;
+
+/*1.11*/
+Select Articulos.Nombre, Articulos.Precio, Fabricantes.Nombre from Articulos
+LEFT OUTER JOIN Fabricantes ON Articulos.IdFabricante = Fabricantes.Id;
+
+/*1.12*/
+Select Fabricantes.Id, AVG(Articulos.Precio) from Fabricantes
+LEFT OUTER JOIN Articulos ON Fabricantes.Id = Articulos.IdFabricante
+group by Fabricantes.Id;
+
+/*1.13*/
+Select Fabricantes.Nombre, AVG(Articulos.Precio) from Fabricantes
+LEFT OUTER JOIN Articulos ON Fabricantes.Id = Articulos.IdFabricante
+group by Fabricantes.Nombre;
+
+/*1.14*/
+Select Fabricantes.Nombre, AVG(Articulos.Precio) from Fabricantes
+LEFT OUTER JOIN Articulos ON Fabricantes.Id = Articulos.IdFabricante
+where Articulos.Precio >= 150
+group by Fabricantes.Nombre;
+
+/*1.15*/
+Select Nombre, Precio from Articulos
+Where Precio = ANY(select min(Precio) from Articulos);
+
+/*1.16*/
+select Articulos.Nombre, Articulos.Precio, Fabricantes.Nombre from Articulos
+LEFT OUTER JOIN Fabricantes on Articulos.IdFabricante = Fabricantes.Id
+where Articulos.Precio = (
+select MAX(Articulos.Precio)
+from Articulos
+where Articulos.IdFabricante = Fabricantes.Id);
+
+/*1.17*/
+insert into Articulos(Nombre,Precio,IdFabricante) values("Altavoces", 70, 2);
+
+/*1.18*/
+update Articulos set Nombre = "Impresora Laser"
+where Codigo = 3; /* Codigo 3 porque 8 no tengo*/
+
+/*1.19*/
+update Articulos set Precio = Precio* 0.9;
+
+/*1.20*/
+update Articulos set Precio = Precio - 10 where Precio >= 120;

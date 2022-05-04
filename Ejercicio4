@@ -1,0 +1,41 @@
+/*4.1*/
+select Nombre from Peliculas;
+
+/*4.2*/
+select CalificacionEdad from peliculas;
+
+/*4.3*/
+select Nombre, CalificacionEdad from Peliculas
+where CalificacionEdad is null;
+
+/*4.4*/
+select * from Salas
+where IdPelicula is null;
+
+/*4.5*/
+select * from Salas
+left outer join Peliculas on Peliculas.Id = Salas.IdPelicula;
+
+/*4.6*/
+select * from Peliculas
+left outer join Salas on Salas.IdPelicula = Peliculas.Id;
+
+/*4.7*/
+select Peliculas.Nombre from Peliculas
+left outer join Salas on Salas.IdPelicula = Peliculas.Id
+where Salas.IdPelicula is null;
+
+/*4.8*/
+insert into Peliculas(Nombre,CalificacionEdad) values("uno, dos, tres", '7');
+
+/*4.9*/
+update Peliculas set CalificacionEdad = 13
+where CalificacionEdad is null;
+
+/*4.10*/
+delete from Salas where IdPelicula 
+in (select Id  from Peliculas
+where CalificacionEdad >= 0);
+
+select * from Peliculas;
+select * from Salas;
